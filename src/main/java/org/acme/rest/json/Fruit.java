@@ -1,21 +1,17 @@
 package org.acme.rest.json;
 
-import java.util.Objects;
+import java.util.List;
 
-public class Fruit {
+import io.quarkus.mongodb.panache.MongoEntity;
+import io.quarkus.mongodb.panache.PanacheMongoEntity;
+
+@MongoEntity(collection = "fruits")
+public class Fruit extends PanacheMongoEntity {
   private String name;
   private String description;
-  private String id;
-
-  public Fruit() {}
-
-  public Fruit(String name, String description) {
-    this.name = name;
-    this.description = description;
-  }
 
   public String getName() {
-    return name;
+    return name.toUpperCase();
   }
 
   public void setName(String name) {
@@ -30,25 +26,7 @@ public class Fruit {
     this.description = description;
   }
 
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (!(obj instanceof Fruit)) {
-      return false;
-    }
-    Fruit other = (Fruit) obj;
-    return Objects.equals(other.name, this.name);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(this.name);
+  public static List<Fruit> findByName(String name) {
+    return list("name", name);
   }
 }

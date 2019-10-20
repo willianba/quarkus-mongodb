@@ -27,7 +27,7 @@
         };
         $http({
           method: "POST",
-          url: '/reactive_fruits',
+          url: '/fruits',
           data: angular.toJson(data),
           headers: {
             'Content-Type': 'application/json'
@@ -40,7 +40,7 @@
       function _refreshPageData() {
         $http({
           method: 'GET',
-          url: '/reactive_fruits'
+          url: '/fruits'
         }).then(function successCallback(response) {
           $scope.fruits = response.data;
         }, function errorCallback(response) {
