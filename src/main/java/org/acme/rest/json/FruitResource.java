@@ -30,7 +30,7 @@ public class FruitResource {
 
   @GET
   @Path("/{id}")
-  public Fruit get(String id) {
+  public Fruit get(@PathParam("id") String id) {
     return Fruit.findById(id);
   }
 
@@ -42,15 +42,15 @@ public class FruitResource {
 
   @DELETE
   @Path("/{id}")
-  public void delete(String id) {
+  public void delete(@PathParam("id") String id) {
     Fruit fruit = Fruit.findById(id);
     fruit.delete();
   }
 
   @GET
   @Path("/search/{name}")
-  public List<Fruit> search(String name) {
-    return Fruit.findByName(name);
+  public List<Fruit> search(@PathParam("name") String name) {
+    return Fruit.findByName(name.toUpperCase());
   }
 
   @GET
